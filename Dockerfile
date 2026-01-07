@@ -9,7 +9,7 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 # By default, use the enterprise theme
-ARG THEME=enterprise
+ARG THEME=personal
 
 WORKDIR /app/packages/blog-starter-kit/themes/${THEME}
 RUN cp .env.example .env.local
