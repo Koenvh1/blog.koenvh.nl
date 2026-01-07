@@ -70,18 +70,14 @@ export const PersonalHeader = () => {
 							href="/"
 							aria-label={`${publication.author.name}'s blog home page`}
 						>
-							{publication.author.profilePicture && (
+							{publication.preferences.logo && (
 								<img
-									className="block h-8 w-8 rounded-full fill-current"
+									className="block h-12"
 									alt={publication.author.name}
-									src={resizeImage(publication.author.profilePicture, {
-										w: 400,
-										h: 400,
-										c: 'face',
-									})}
+									src={publication.preferences.logo}
 								/>
 							)}
-							{publication.title}
+							{/* {publication.title} */}
 						</Link>
 					</h1>
 					<ToggleTheme className="md:hidden" />
