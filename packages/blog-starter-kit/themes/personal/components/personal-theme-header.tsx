@@ -1,7 +1,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { resizeImage } from '@starter-kit/utils/image';
 import Link from 'next/link';
-import { PublicationNavbarItem } from '../generated/graphql';
+import { PublicationNavbarItem, PublicationNavigationType } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
 import { ToggleTheme } from './toggle-theme';
 
@@ -14,9 +14,33 @@ function hasUrl(
 export const PersonalHeader = () => {
 	const { publication } = useAppContext();
 
-	const navbarItems = publication.preferences.navbarItems.filter(hasUrl);
-	const visibleItems = navbarItems.slice(0, 2);
-	const hiddenItems = navbarItems.slice(2);
+	let navbarItems = publication.preferences.navbarItems.filter(hasUrl);
+	if (publication.links && publication.links.mastodon) {
+		navbarItems.push({
+			id: "mastodon",
+			type: PublicationNavigationType.Link,
+			label: "Mastodon",
+			url: publication.links.mastodon
+		});
+	}
+	if (publication.links && publication.links.bluesky) {
+		navbarItems.push({
+			id: "bsky",
+			type: PublicationNavigationType.Link,
+			label: "Bluesky",
+			url: publication.links.bluesky
+		});
+	}
+	if (publication.links && publication.links.linkedin) {
+		navbarItems.push({
+			id: "linkedin",
+			type: PublicationNavigationType.Link,
+			label: "LinkedIn",
+			url: publication.links.linkedin
+		});
+	}
+	const visibleItems = navbarItems.slice(0, 5);
+	const hiddenItems = navbarItems.slice(5);
 
 	const navList = (
 		<ul className="flex list-none flex-row items-center gap-4 text-xs font-semibold uppercase tracking-tight text-neutral-600 dark:text-neutral-300">
@@ -32,7 +56,7 @@ export const PersonalHeader = () => {
 				<li>
 					<DropdownMenu.Root>
 						<DropdownMenu.Trigger asChild>
-							<button>More</button>
+							<button>☰</button>
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Portal>
 							<DropdownMenu.Content
