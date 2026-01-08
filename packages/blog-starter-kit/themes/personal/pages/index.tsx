@@ -22,6 +22,7 @@ import {
 	PostsByPublicationQueryVariables,
 	PublicationFragment,
 } from '../generated/graphql';
+import { Newsletter } from '../components/newsletter';
 
 const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 
@@ -95,6 +96,7 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 						<Waypoint onEnter={loadMore} bottomOffset={'10%'} />
 					)}
 
+					<Newsletter />
 					<Footer />
 				</Container>
 			</Layout>

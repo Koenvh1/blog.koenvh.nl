@@ -1,0 +1,74 @@
+import { useRef, useState } from 'react';
+import { useAppContext } from './contexts/appContext';
+import request from 'graphql-request';
+import { SubscribeToNewsletterDocument, SubscribeToNewsletterMutation, SubscribeToNewsletterMutationVariables, SubscribeToNewsletterPayload } from '../generated/graphql';
+
+const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
+
+export const Newsletter = () => {
+	const [status, setStatus] = useState<SubscribeToNewsletterPayload['status']>();
+	const [requestInProgress, setRequestInProgress] = useState(false);
+	const { publication } = useAppContext();
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	const subscribe = async (event: React.SyntheticEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const email = inputRef.current?.value;
+		if (!email) return;
+
+		setRequestInProgress(true);
+		try {
+			const data = await request<
+				SubscribeToNewsletterMutation,
+				SubscribeToNewsletterMutationVariables
+			>(GQL_ENDPOINT, SubscribeToNewsletterDocument, {
+				input: { publicationId: publication.id, email },
+			});
+			setRequestInProgress(false);
+			setStatus(data.subscribeToNewsletter.status);
+		} catch (error) {
+			const message = (error as any).response?.errors?.[0]?.message;
+			if (message) {
+				window.alert(message);
+			}
+			setRequestInProgress(false);
+		}
+	};
+
+	return (
+		<>
+			{!status && (
+				<div>
+					<h2 className="text-lg font-bold leading-tight tracking-tight text-black dark:text-white pb-2">
+						Subscribe to the newsletter:
+					</h2>
+				<form className="relative w-full bg-white p-2 dark:bg-neutral-950" onSubmit={subscribe}>
+					<input
+						ref={inputRef}
+						type="email"
+						placeholder="john.doe@example.org"
+						className="outline-none outline-black dark:outline-white left-3 top-3 w-full p-3 text-base text-black dark:bg-neutral-950 dark:text-neutral-50"
+					/>
+					<button
+						disabled={requestInProgress}
+						type="submit"
+						className="bg-black dark:bg-white absolute right-3 top-3 px-3 py-2 text-white dark:text-black disabled:cursor-not-allowed disabled:opacity-80"
+					>
+						Subscribe
+					</button>
+				</form>
+				</div>
+			)}
+			{status === 'PENDING' && (
+				<div className="relative w-full p-2">
+					<p className="font-bold">Subscription request received</p>
+					<p className="font-medium">
+						Check your inbox for a confirmation email and click{' '}
+						<strong>&quot;Confirm and Subscribe&quot;</strong> to complete your subscription. 
+					</p>
+				</div>
+			)}
+		</>
+	);
+};
