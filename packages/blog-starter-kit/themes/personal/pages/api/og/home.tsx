@@ -11,29 +11,29 @@ const fontRegular = fetch(
 	new URL('../../../assets/Inter-Regular.ttf', import.meta.url),
 ).then((res) => res.arrayBuffer());
 
-const fontMedium = fetch(
-	new URL('../../../assets/Inter-Medium.ttf', import.meta.url),
-).then((res) => res.arrayBuffer());
+// const fontMedium = fetch(
+// 	new URL('../../../assets/Inter-Medium.ttf', import.meta.url),
+// ).then((res) => res.arrayBuffer());
 
-const fontSemiBold = fetch(
-	new URL('../../../assets/Inter-SemiBold.ttf', import.meta.url),
-).then((res) => res.arrayBuffer());
+// const fontSemiBold = fetch(
+// 	new URL('../../../assets/Inter-SemiBold.ttf', import.meta.url),
+// ).then((res) => res.arrayBuffer());
 
 const fontBold = fetch(new URL('../../../assets/Inter-Bold.ttf', import.meta.url)).then(
 	(res) => res.arrayBuffer(),
 );
 
-const fontExtraBold = fetch(
-	new URL('../../../assets/Inter-ExtraBold.ttf', import.meta.url),
-).then((res) => res.arrayBuffer());
+// const fontExtraBold = fetch(
+// 	new URL('../../../assets/Inter-ExtraBold.ttf', import.meta.url),
+// ).then((res) => res.arrayBuffer());
 
 const kFormatter = (num: number) => {
 	return num > 999 ? `${(num / 1000).toFixed(1)}K` : num;
 };
 
 export default async function handler(req: NextRequest) {
-	const [fontDataRegular, fontDataMedium, fontDataSemiBold, fontDataBold, fontDataExtraBold] =
-		await Promise.all([fontRegular, fontMedium, fontSemiBold, fontBold, fontExtraBold]);
+	const [fontDataRegular, fontDataBold] =
+		await Promise.all([fontRegular, fontBold]);
 
 	const { searchParams } = new URL(req.url);
 
@@ -198,27 +198,9 @@ export default async function handler(req: NextRequest) {
 				},
 				{
 					name: 'Inter',
-					data: fontDataMedium,
-					style: 'normal',
-					weight: 500,
-				},
-				{
-					name: 'Inter',
-					data: fontDataSemiBold,
-					style: 'normal',
-					weight: 600,
-				},
-				{
-					name: 'Inter',
 					data: fontDataBold,
 					style: 'normal',
 					weight: 700,
-				},
-				{
-					name: 'Inter',
-					data: fontDataExtraBold,
-					style: 'normal',
-					weight: 800,
 				},
 			],
 		},
