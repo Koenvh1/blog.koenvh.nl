@@ -8,23 +8,23 @@ export const config = {
 };
 
 const fontRegular = fetch(
-	new URL('../../../assets/PlusJakartaSans-Regular.ttf', import.meta.url),
+	new URL('../../../assets/Inter-Regular.ttf', import.meta.url),
 ).then((res) => res.arrayBuffer());
 
 const fontMedium = fetch(
-	new URL('../../../assets/PlusJakartaSans-Medium.ttf', import.meta.url),
+	new URL('../../../assets/Inter-Medium.ttf', import.meta.url),
 ).then((res) => res.arrayBuffer());
 
 const fontSemiBold = fetch(
-	new URL('../../../assets/PlusJakartaSans-SemiBold.ttf', import.meta.url),
+	new URL('../../../assets/Inter-SemiBold.ttf', import.meta.url),
 ).then((res) => res.arrayBuffer());
 
-const fontBold = fetch(new URL('../../../assets/PlusJakartaSans-Bold.ttf', import.meta.url)).then(
+const fontBold = fetch(new URL('../../../assets/Inter-Bold.ttf', import.meta.url)).then(
 	(res) => res.arrayBuffer(),
 );
 
 const fontExtraBold = fetch(
-	new URL('../../../assets/PlusJakartaSans-ExtraBold.ttf', import.meta.url),
+	new URL('../../../assets/Inter-ExtraBold.ttf', import.meta.url),
 ).then((res) => res.arrayBuffer());
 
 const kFormatter = (num: number) => {
@@ -57,14 +57,14 @@ export default async function handler(req: NextRequest) {
 		meta = decodeURIComponent(encodedMeta);
 	}
 
-	const bannerBackground = '#f1f5f9';
+	const bannerBackground = '#f3f4f6';
 	const photo = userPhoto || DEFAULT_AVATAR;
 
 	return new ImageResponse(
 		(
 			<div
 				style={{
-					fontFamily: '"Plus Jakarta Sans"',
+					fontFamily: '"Inter"',
 				}}
 				tw={`relative flex h-full w-full p-8 bg-white`}
 			>
@@ -109,12 +109,12 @@ export default async function handler(req: NextRequest) {
 								)}
 								<div tw="flex flex-row items-center text-2xl opacity-75">
 									{/* If no of followers is zero hide this p tag */}
-									{followers > 0 && (
+									{/* {followers > 0 && (
 										<p tw="m-0 mr-5 flex flex-row items-center">
 											<strong tw="mr-2">{kFormatter(followers)}</strong>
 											<span>follower{followers === 1 ? '' : 's'}</span>
 										</p>
-									)}
+									)} */}
 									{/* If no of articles are zero, hide this p tag */}
 									{articles > 0 && (
 										<p tw="m-0 mr-5 flex flex-row items-center">
@@ -166,12 +166,12 @@ export default async function handler(req: NextRequest) {
 								)}
 								<div tw="flex flex-row items-center text-2xl opacity-75">
 									{/* If no of followers is zero hide this p tag */}
-									{followers > 0 && (
+									{/* {followers > 0 && (
 										<p tw="m-0 mr-5 flex flex-row items-center">
 											<strong tw="mr-2">{kFormatter(followers)}</strong>
 											<span>follower{followers === 1 ? '' : 's'}</span>
 										</p>
-									)}
+									)} */}
 									{/* If no of articles are zero, hide this p tag */}
 									{articles > 0 && (
 										<p tw="m-0 mr-5 flex flex-row items-center">
@@ -191,31 +191,31 @@ export default async function handler(req: NextRequest) {
 			height: 630,
 			fonts: [
 				{
-					name: 'Typewriter',
+					name: 'Inter',
 					data: fontDataRegular,
 					style: 'normal',
 					weight: 400,
 				},
 				{
-					name: 'Typewriter',
+					name: 'Inter',
 					data: fontDataMedium,
 					style: 'normal',
 					weight: 500,
 				},
 				{
-					name: 'Typewriter',
+					name: 'Inter',
 					data: fontDataSemiBold,
 					style: 'normal',
 					weight: 600,
 				},
 				{
-					name: 'Typewriter',
+					name: 'Inter',
 					data: fontDataBold,
 					style: 'normal',
 					weight: 700,
 				},
 				{
-					name: 'Typewriter',
+					name: 'Inter',
 					data: fontDataExtraBold,
 					style: 'normal',
 					weight: 800,
