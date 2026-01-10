@@ -1,0 +1,5 @@
+query Robots($host: String!) {
+	publication(host: $host) {
+		url
+	}
+}

@@ -1,15 +1,29 @@
+import request from 'graphql-request';
 import { type GetServerSideProps } from 'next';
+import { RobotsDocument, RobotsQuery, RobotsQueryVariables } from '../generated/graphql';
 
+const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 const RobotsTxt = () => null;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { res } = ctx;
-	const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST;
-	if (!host) {
-		throw new Error('Could not determine host');
+
+	const initialData = await request<RobotsQuery, RobotsQueryVariables>(
+		GQL_ENDPOINT,
+		RobotsDocument,
+		{
+			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST
+		},
+	);
+
+	const publication = initialData.publication;
+	if (!publication) {
+		return {
+			notFound: true,
+		};
 	}
 
-	const sitemapUrl = `https://${host}/sitemap.xml`;
+	const sitemapUrl = `${publication.url}/sitemap.xml`;
 	const robotsTxt = `
 User-agent: *
 Allow: /
