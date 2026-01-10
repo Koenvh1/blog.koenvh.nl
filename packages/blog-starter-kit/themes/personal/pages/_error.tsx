@@ -2,7 +2,10 @@ import { GetServerSideProps } from "next";
 import Link from "next/link";
 
 export default function Error() {
-  return <div>Whoops, that page does not seem to exist. <Link href="/">Go back home</Link>.</div>
+    return <div className="p-5">
+        Whoops, that page does not seem to exist.<br />
+        <a className="font-bold" href={"/"}>Go back home</a>.
+    </div>
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
