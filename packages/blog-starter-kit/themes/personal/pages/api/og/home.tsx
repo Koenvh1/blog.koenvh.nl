@@ -66,13 +66,13 @@ export default async function handler(req: NextRequest) {
 				style={{
 					fontFamily: '"Inter"',
 				}}
-				tw={`relative flex h-full w-full p-8 bg-white`}
+				tw={`relative flex h-full w-full p-8 bg-[${bannerBackground}]`}
 			>
 				{/* PERSONAL BLOG The following parent div is for personal blogs */}
 				{/* if the site is set to open in dark mode by default, change text-black to text-white and bg-white to bg-black */}
 				{!isTeam && (
 					<div
-						tw={`flex w-full flex-col items-center justify-center text-black h-full p-10 bg-[${bannerBackground}] relative rounded-xl`}
+						tw={`flex shadow-md w-full flex-col items-center justify-center text-black h-full p-10 bg-white relative rounded-xl`}
 					>
 						<div tw="absolute -top-px -left-px -right-px -bottom-px rounded-xl border-2 border-black/5" />
 						<div tw="mx-auto flex flex-row items-center" style={{ width: '90%' }}>
@@ -132,7 +132,7 @@ export default async function handler(req: NextRequest) {
 				{/* if the site is set to open in dark mode by default, change text-black to text-white and bg-white to bg-black */}
 				{isTeam && (
 					<div
-						tw={`flex w-full flex-col items-center justify-center text-black h-full p-10 bg-[${bannerBackground}] relative rounded-xl`}
+						tw={`flex shadow-md w-full flex-col items-center justify-center text-black h-full p-10 bg-white relative rounded-xl`}
 					>
 						<div tw="absolute -top-px -left-px -right-px -bottom-px rounded-xl border-2 border-black/5" />
 						<div tw="mx-auto flex flex-row items-center" style={{ width: '80%' }}>
