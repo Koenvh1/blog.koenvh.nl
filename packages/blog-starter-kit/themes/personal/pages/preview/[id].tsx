@@ -62,7 +62,7 @@ export default function Post({ publication, post }: Props) {
 							<title>{post.seo?.title || post.title}</title>
 							<style dangerouslySetInnerHTML={{ __html: highlightJsMonokaiTheme }}></style>
 						</Head>
-						<h1 className="text-4xl leading-tight tracking-tight text-black dark:text-white">
+						<h1 className="text-4xl font-bold leading-tight tracking-tight text-black dark:text-white">
 							{post.title}
 						</h1>
 						{!!coverImageSrc && (
