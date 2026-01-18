@@ -3,6 +3,7 @@ import { type GetServerSideProps } from 'next';
 import { RobotsDocument, RobotsQuery, RobotsQueryVariables } from '../generated/graphql';
 
 const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
+const PUBLICATION_URL = process.env.NEXT_PUBLICATION_URL;
 const RobotsTxt = () => null;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -23,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		};
 	}
 
-	const sitemapUrl = `${publication.url}/sitemap.xml`;
+	const sitemapUrl = `${PUBLICATION_URL || publication.url}/sitemap.xml`;
 	const robotsTxt = `
 User-agent: *
 Allow: /

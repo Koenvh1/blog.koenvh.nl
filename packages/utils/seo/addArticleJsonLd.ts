@@ -1,15 +1,17 @@
+const PUBLICATION_URL = process.env.NEXT_PUBLICATION_URL;
+
 export const addArticleJsonLd = (publication: any, post: any) => {
 	const tags = (post.tags ?? []).map((tag: any) => tag.name);
 	const schema = {
 		'@context': 'https://schema.org/',
 		'@type': 'Blog',
-		'@id': publication.url,
-		mainEntityOfPage: publication.url,
+		'@id': PUBLICATION_URL || publication.url,
+		mainEntityOfPage: PUBLICATION_URL || publication.url,
 		name: publication.title,
 		description: publication.about?.markdown,
 		publisher: {
 			'@type': publication.isTeam ? 'Organization' : 'Person',
-			'@id': publication.url,
+			'@id': PUBLICATION_URL || publication.url,
 			name: publication.title,
 			image: {
 				'@type': 'ImageObject',

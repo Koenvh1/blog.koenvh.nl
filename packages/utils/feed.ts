@@ -1,6 +1,7 @@
 import RSS from 'rss';
 
 const NON_ASCII_REGEX = /[\u{0080}-\u{FFFF}]/gu;
+const PUBLICATION_URL = process.env.NEXT_PUBLICATION_URL;
 
 export const constructRSSFeedFromPosts = (
 	publication: any,
@@ -8,7 +9,7 @@ export const constructRSSFeedFromPosts = (
 	currentCursor: string | null,
 	nextCursor: string | null,
 ) => {
-	const baseUrl = publication.url;
+	const baseUrl = PUBLICATION_URL || publication.url;
 
 	const customElements = [
 		{

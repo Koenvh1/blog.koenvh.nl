@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useAppContext } from './contexts/appContext';
 
+const PUBLICATION_URL = process.env.NEXT_PUBLICATION_URL;
+
 export function Integrations() {
 	const { publication } = useAppContext();
 	const {
@@ -17,7 +19,7 @@ export function Integrations() {
 		koalaPublicKey,
 		msClarityID,
 	} = publication.integrations ?? {};
-	const domainURL = new URL(publication.url).hostname;
+	const domainURL = new URL(PUBLICATION_URL || publication.url).hostname;
 
 	let fbPixel = `
     !function(f,b,e,v,n,t,s)
