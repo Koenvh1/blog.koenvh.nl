@@ -84,14 +84,14 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 						}}
 					/>
 				</Head>
-				<Container className="mx-auto flex max-w-3xl flex-col items-stretch gap-10 px-5 py-10">
+				<Container className="mx-auto flex max-w-3xl w-full flex-col items-stretch gap-10 px-5 py-10">
 					<PersonalHeader />
 					<p className="italic">
 						{publication.about?.text}
 					</p>
 					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
 					{!loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
-						<button onClick={loadMore}>
+						<button className='bg-black dark:bg-white hover:underline px-3 py-2 text-white dark:text-black disabled:cursor-not-allowed disabled:opacity-80' onClick={loadMore}>
 							Load more
 						</button>
 					)}

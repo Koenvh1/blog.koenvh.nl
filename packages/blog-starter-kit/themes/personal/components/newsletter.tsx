@@ -48,12 +48,12 @@ export const Newsletter = () => {
 						ref={inputRef}
 						type="email"
 						placeholder="john.doe@example.org"
-						className="outline-none outline-black dark:outline-white left-3 top-3 w-full p-3 text-base text-black dark:bg-neutral-950 dark:text-neutral-50"
+						className="outline-none outline-black dark:outline-white left-3 top-3 w-full p-3 text-base text-black dark:bg-black dark:text-neutral-50"
 					/>
 					<button
 						disabled={requestInProgress}
 						type="submit"
-						className="bg-black dark:bg-white absolute right-3 top-3 px-3 py-2 text-white dark:text-black disabled:cursor-not-allowed disabled:opacity-80"
+						className="bg-black dark:bg-white hover:underline absolute right-3 top-3 px-3 py-2 text-white dark:text-black disabled:cursor-not-allowed disabled:opacity-80"
 					>
 						Subscribe
 					</button>
