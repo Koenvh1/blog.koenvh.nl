@@ -1,4 +1,4 @@
-@import url(https://fonts.bunny.net/css?family=inter:400,500,600,700);
+@import url(inter.css);
 
 @tailwind base;
 @tailwind components;
