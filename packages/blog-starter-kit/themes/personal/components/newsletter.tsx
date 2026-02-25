@@ -6,7 +6,7 @@ import { SubscribeToNewsletterDocument, SubscribeToNewsletterMutation, Subscribe
 const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 
 export const Newsletter = () => {
-	const [status, setStatus] = useState<SubscribeToNewsletterPayload['status']>();
+	const [status, setStatus] = useState<boolean>(false);
 	const [requestInProgress, setRequestInProgress] = useState(false);
 	const { publication } = useAppContext();
 
@@ -19,14 +19,14 @@ export const Newsletter = () => {
 
 		setRequestInProgress(true);
 		try {
-			const data = await request<
-				SubscribeToNewsletterMutation,
-				SubscribeToNewsletterMutationVariables
-			>(GQL_ENDPOINT, SubscribeToNewsletterDocument, {
-				input: { publicationId: publication.id, email },
-			});
+			let formData = new FormData();
+			formData.set("fields[email]", email);
+			const data = await (await fetch("https://assets.mailerlite.com/jsonp/2046517/forms/176944960107448186/subscribe", {
+				method: "POST",
+				body: formData
+			})).json();
 			setRequestInProgress(false);
-			setStatus(data.subscribeToNewsletter.status);
+			setStatus(data.success);
 		} catch (error) {
 			const message = (error as any).response?.errors?.[0]?.message;
 			if (message) {
@@ -47,6 +47,7 @@ export const Newsletter = () => {
 					<input
 						ref={inputRef}
 						type="email"
+						name="fields[email]"
 						placeholder="john.doe@example.org"
 						className="outline-none outline-black dark:outline-white left-3 top-3 w-full p-3 text-base text-black dark:bg-black dark:text-neutral-50"
 					/>
@@ -60,7 +61,7 @@ export const Newsletter = () => {
 				</form>
 				</div>
 			)}
-			{status === 'PENDING' && (
+			{status && (
 				<div className="relative w-full p-2">
 					<p className="font-bold">Subscription request received</p>
 					<p className="font-medium">
