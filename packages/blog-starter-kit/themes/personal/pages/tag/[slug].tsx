@@ -90,7 +90,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 			publication,
 			tag: params.slug,
 		},
-		revalidate: 1,
+		revalidate: 300,
 	};
 };
 
