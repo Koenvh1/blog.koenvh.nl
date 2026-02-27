@@ -206,7 +206,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 				post: postData.publication.post,
 				publication: postData.publication,
 			},
-			tags: ["blog"],
 			revalidate: 1,
 		};
 	}
@@ -220,14 +219,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 				page: pageData.publication.staticPage,
 				publication: pageData.publication,
 			},
-			tags: ["blog"],
 			revalidate: 1,
 		};
 	}
 
 	return {
 		notFound: true,
-		tags: ["blog"],
 		revalidate: 1,
 	};
 };
