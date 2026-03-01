@@ -39,11 +39,16 @@ export const PersonalHeader = () => {
 			url: publication.links.linkedin
 		});
 	}
-	const visibleItems = navbarItems.slice(0, 5);
-	const hiddenItems = navbarItems.slice(5);
+	const visibleItems = navbarItems.slice(0, 3);
+	const hiddenItems = navbarItems.slice(3);
 
 	const navList = (
 		<ul className="flex list-none flex-row items-center gap-4 text-xs font-semibold uppercase tracking-tight text-neutral-600 dark:text-neutral-300">
+			<li>
+				<Link href="/" className="hover:underline">
+					Posts
+				</Link>
+			</li>
 			{visibleItems.map((item) => (
 				<li key={item.url}>
 					<a href={item.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -60,7 +65,7 @@ export const PersonalHeader = () => {
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Portal>
 							<DropdownMenu.Content
-								className="flex flex-col items-stretch gap-1 rounded-lg border bg-white text-xs font-semibold uppercase tracking-tight text-neutral-600 shadow-xl dark:border-neutral-800 dark:bg-black  dark:text-neutral-300"
+								className="flex flex-col items-stretch gap-1 border bg-white text-xs font-semibold uppercase tracking-tight text-neutral-600 shadow-xl dark:border-neutral-800 dark:bg-black  dark:text-neutral-300"
 								sideOffset={5}
 								align="end"
 							>
