@@ -230,25 +230,19 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 };
 
 export async function getStaticPaths() {
-	const data = await request(
-		process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
-		SlugPostsByPublicationDocument,
-		{
-			first: 20,
-			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-		},
-	);
+	// const data = await request(
+	// 	process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
+	// 	SlugPostsByPublicationDocument,
+	// 	{
+	// 		first: 0,
+	// 		host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
+	// 	},
+	// );
 
-	const postSlugs = (data.publication?.posts.edges ?? []).map((edge) => edge.node.slug);
+	// const postSlugs = (data.publication?.posts.edges ?? []).map((edge) => edge.node.slug);
 
 	return {
-		paths: postSlugs.map((slug) => {
-			return {
-				params: {
-					slug: slug,
-				},
-			};
-		}),
+		paths: [],
 		fallback: 'blocking',
 	};
 }
