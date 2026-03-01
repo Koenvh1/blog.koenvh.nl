@@ -234,7 +234,7 @@ export async function getStaticPaths() {
 		process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
 		SlugPostsByPublicationDocument,
 		{
-			first: 10,
+			first: 20,
 			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
 		},
 	);
