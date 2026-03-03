@@ -196,12 +196,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 	const endpoint = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 	const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST;
 	const slug = params.slug;
-	
+
 	if (!/^[a-z0-9-]+$/.test(slug)) {
-	  	return {
-		  notFound: true,
-		  revalidate: 300,
-	  };
+		return {
+			notFound: true,
+			revalidate: 300,
+		};
 	}
 
 	const postData = await request(endpoint, SinglePostByPublicationDocument, { host, slug });
