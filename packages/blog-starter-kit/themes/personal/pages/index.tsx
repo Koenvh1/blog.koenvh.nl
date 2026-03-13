@@ -114,16 +114,21 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 		{
 			first: 20,
 			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-		},
-		{
-			"X-Cache-Buster": (new Date()).toString()
 		}
 	);
+
+	if (process.env.BUILD) {
+		return {
+			notFound: true,
+			revalidate: true
+		}
+	}
 
 	const publication = data.publication;
 	if (!publication) {
 		return {
 			notFound: true,
+			revalidate: 1,
 		};
 	}
 	const initialPosts = (publication.posts.edges ?? []).map((edge) => edge.node);
