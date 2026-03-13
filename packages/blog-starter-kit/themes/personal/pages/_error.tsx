@@ -11,6 +11,8 @@ export default function Error() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { req, res, query } = ctx;
 
+	res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate');
+
     if (req.method && req.method == "POST") {
         res.statusCode = 303;
         res.setHeader("Location", req.url ?? "/");
