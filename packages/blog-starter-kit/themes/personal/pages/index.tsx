@@ -109,20 +109,16 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	const data = await request<PostsByPublicationQuery, PostsByPublicationQueryVariables>(
-		GQL_ENDPOINT + "?x-cache-buster=" + (new Date()).toString(),
+		GQL_ENDPOINT,
 		PostsByPublicationDocument,
 		{
 			first: 20,
 			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
+		},
+		{
+			"hn-stellate-bypass-cache": "1"
 		}
 	);
-
-	if (process.env.BUILD) {
-		return {
-			notFound: true,
-			revalidate: true
-		}
-	}
 
 	const publication = data.publication;
 	if (!publication) {
