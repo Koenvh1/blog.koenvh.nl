@@ -10,11 +10,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { res, query } = ctx;
 	const after = query.after ? (query.after as string) : null;
 
-	const data = await request<RssFeedQuery, RssFeedQueryVariables>(GQL_ENDPOINT, RssFeedDocument, {
-		first: 20,
-		host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-		after,
-	});
+	const data = await request<RssFeedQuery, RssFeedQueryVariables>(GQL_ENDPOINT, RssFeedDocument, 
+		{
+			first: 20,
+			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
+			after,
+		},
+		{
+			"hn-stellate-bypass-cache": "1"
+		}
+	);
 
 	const publication = data.publication;
 	if (!publication) {

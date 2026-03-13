@@ -98,6 +98,9 @@ export async function getStaticProps({ params }: Params) {
 			{
 				id: params.id,
 			},
+			{ 
+				"hn-stellate-bypass-cache": "1" 
+			}
 		),
 		request<PublicationByHostQuery, PublicationByHostQueryVariables>(
 			process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
@@ -116,7 +119,7 @@ export async function getStaticProps({ params }: Params) {
 			post,
 			publication,
 		},
-		revalidate: false,
+		revalidate: true,
 	};
 }
 

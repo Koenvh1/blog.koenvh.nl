@@ -204,7 +204,10 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 		};
 	}
 
-	const postData = await request(endpoint, SinglePostByPublicationDocument, { host, slug });
+	const postData = await request(endpoint, SinglePostByPublicationDocument, 
+		{ host, slug },
+		{ "hn-stellate-bypass-cache": "1" }
+	);
 
 	if (postData.publication?.post) {
 		return {
@@ -237,8 +240,28 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 };
 
 export async function getStaticPaths() {
-  return {
-		paths: [],
+	const data = await request(
+		process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
+		SlugPostsByPublicationDocument,
+		{
+			first: 20,
+			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
+		},
+		{ 
+			"hn-stellate-bypass-cache": "1" 
+		}
+	);
+
+	const postSlugs = (data.publication?.posts.edges ?? []).map((edge) => edge.node.slug);
+
+	return {
+		paths: postSlugs.map((slug) => {
+			return {
+				params: {
+					slug: slug,
+				},
+			};
+		}),
 		fallback: 'blocking',
 	};
 }

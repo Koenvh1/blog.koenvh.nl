@@ -25,6 +25,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 			postsCount: 20,
 			staticPagesCount: 50,
 		},
+		{
+			"hn-stellate-bypass-cache": "1"
+		}
 	);
 
 	const publication = initialData.publication;
