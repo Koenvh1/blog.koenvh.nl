@@ -115,6 +115,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 			first: 20,
 			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
 		},
+		{
+			"X-Cache-Buster": (new Date()).toString()
+		}
 	);
 
 	const publication = data.publication;
