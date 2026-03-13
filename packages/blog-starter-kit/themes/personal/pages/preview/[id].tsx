@@ -116,7 +116,7 @@ export async function getStaticProps({ params }: Params) {
 			post,
 			publication,
 		},
-		revalidate: 1,
+		revalidate: false,
 	};
 }
 
