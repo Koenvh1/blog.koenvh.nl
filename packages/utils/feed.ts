@@ -1,6 +1,5 @@
 import RSS from 'rss';
 
-const NON_ASCII_REGEX = /[\u{0080}-\u{FFFF}]/gu;
 const PUBLICATION_URL = process.env.NEXT_PUBLICATION_URL;
 
 export const constructRSSFeedFromPosts = (
@@ -48,7 +47,7 @@ export const constructRSSFeedFromPosts = (
 	posts.forEach((post) => {
 		feed.item({
 			title: post.title,
-			description: post.content!.html!.replace(NON_ASCII_REGEX, ''),
+			description: post.content!.html!,
 			url: `${baseUrl}/${post.slug}`,
 			categories: post.tags!.map((tag: any) => tag.name),
 			author: post.author!.name,
@@ -57,6 +56,6 @@ export const constructRSSFeedFromPosts = (
 		});
 	});
 
-	const xml = feed.xml();
+	const xml = feed.xml({indent: "\t"});
 	return xml;
 };
