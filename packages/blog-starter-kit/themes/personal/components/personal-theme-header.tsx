@@ -18,7 +18,7 @@ export const PersonalHeader = () => {
 	if (publication.links && publication.links.mastodon) {
 		navbarItems.push({
 			id: "mastodon",
-			// type: PublicationNavigationType.Link,
+			type: "link",
 			label: "Mastodon",
 			url: publication.links.mastodon
 		});
@@ -26,7 +26,7 @@ export const PersonalHeader = () => {
 	if (publication.links && publication.links.bluesky) {
 		navbarItems.push({
 			id: "bsky",
-			// type: PublicationNavigationType.Link,
+			type: "link",
 			label: "Bluesky",
 			url: publication.links.bluesky
 		});
@@ -34,7 +34,7 @@ export const PersonalHeader = () => {
 	if (publication.links && publication.links.linkedin) {
 		navbarItems.push({
 			id: "linkedin",
-			// type: PublicationNavigationType.Link,
+			type: "link",
 			label: "LinkedIn",
 			url: publication.links.linkedin
 		});

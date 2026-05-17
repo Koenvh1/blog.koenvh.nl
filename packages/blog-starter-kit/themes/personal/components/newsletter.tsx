@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react';
 import { useAppContext } from './contexts/appContext';
-import request from 'graphql-request';
-import { SubscribeToNewsletterDocument, SubscribeToNewsletterMutation, SubscribeToNewsletterMutationVariables, SubscribeToNewsletterPayload } from '../generated/graphql';
 
 const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 
