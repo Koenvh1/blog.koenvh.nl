@@ -16,6 +16,22 @@ export const PersonalHeader = () => {
 	const publication  = getPublication();
 
 	let navbarItems = [];
+	if (publication.website) {
+		navbarItems.push({
+			id: "website",
+			type: "link",
+			label: "Website",
+			url: publication.website
+		});
+	}
+	if (publication.cv) {
+		navbarItems.push({
+			id: "cv",
+			type: "link",
+			label: "CV",
+			url: publication.cv
+		});
+	}
 	if (publication.mastodon) {
 		navbarItems.push({
 			id: "mastodon",

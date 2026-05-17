@@ -7,6 +7,8 @@ export const getPublication = () => {
         "logo": "assets/logo.svg",
         "photo": "assets/photo.jpg",
         "favicon": "assets/favicon.png",
+        "website": "https://koenvh.nl",
+        "cv": "https://koenvanhove.nl",
         "mastodon": "https://mastodon.nl/@Koenvh",
         "bluesky": "https://bsky.app/profile/koenvh.nl",
         "linkedin": "https://www.linkedin.com/in/koen-van-hove/"
