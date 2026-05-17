@@ -32,11 +32,11 @@ export const constructRSSFeedFromPosts = (
 	}
 
 	const feedConfig = {
-		title: `${publication.title || `${publication.author!.name}'s blog`}`,
-		description: publication.about?.html,
-		feed_url: `${baseUrl}/rss.xml${currentCursor ? `?after=${currentCursor}` : ''}`,
+		title: `${publication.title}`,
+		description: publication.description,
+		feed_url: `${baseUrl}/rss.xml`,
 		site_url: baseUrl,
-		image_url: publication.preferences!.logo,
+		image_url: publication.logo,
 		language: 'en',
 		ttl: 60,
 		custom_elements: customElements,
@@ -47,12 +47,10 @@ export const constructRSSFeedFromPosts = (
 	posts.forEach((post) => {
 		feed.item({
 			title: post.title,
-			description: post.content!.html!,
+			description: post.content,
 			url: `${baseUrl}/${post.slug}`,
-			categories: post.tags!.map((tag: any) => tag.name),
-			author: post.author!.name,
-			date: post.publishedAt,
-			...(post.coverImage && { custom_elements: [{ cover_image: post.coverImage }] }),
+			author: publication.author,
+			date: post.datePublished,
 		});
 	});
 

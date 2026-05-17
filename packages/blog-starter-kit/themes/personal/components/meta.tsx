@@ -1,10 +1,10 @@
 import parse from 'html-react-parser';
 import Head from 'next/head';
-import { useAppContext } from './contexts/appContext';
+import { getPublication } from '../utils/publication';
 
 export const Meta = () => {
-	const { publication } = useAppContext();
-	const { metaTags, favicon } = publication;
+	const publication = getPublication();
+	const { favicon } = publication;
 	const defaultFavicons = (
 		<>
 			<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
@@ -21,7 +21,6 @@ export const Meta = () => {
 			{favicon ? <link rel="icon" type="image/png" href={favicon} /> : defaultFavicons}
 			<meta name="msapplication-config" content="/favicon/browserconfig.xml" />
 			<link rel="alternate" type="application/rss+xml" href="/rss.xml" />
-			{metaTags && parse(metaTags)}
 		</Head>
 	);
 };

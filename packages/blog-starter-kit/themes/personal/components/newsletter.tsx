@@ -1,14 +1,11 @@
 import { useRef, useState } from 'react';
-import { useAppContext } from './contexts/appContext';
-import request from 'graphql-request';
-import { SubscribeToNewsletterDocument, SubscribeToNewsletterMutation, SubscribeToNewsletterMutationVariables, SubscribeToNewsletterPayload } from '../generated/graphql';
+import { getPublication } from '../utils/publication';
 
-const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 
 export const Newsletter = () => {
 	const [status, setStatus] = useState<boolean>(false);
 	const [requestInProgress, setRequestInProgress] = useState(false);
-	const { publication } = useAppContext();
+	const publication = getPublication();
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
