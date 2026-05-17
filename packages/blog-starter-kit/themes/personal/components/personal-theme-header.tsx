@@ -1,7 +1,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { resizeImage } from '@starter-kit/utils/image';
 import Link from 'next/link';
-import { PublicationNavbarItem, PublicationNavigationType } from '../generated/graphql';
+import { PublicationNavbarItem } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
 import { ToggleTheme } from './toggle-theme';
 
@@ -18,7 +18,7 @@ export const PersonalHeader = () => {
 	if (publication.links && publication.links.mastodon) {
 		navbarItems.push({
 			id: "mastodon",
-			type: PublicationNavigationType.Link,
+			// type: PublicationNavigationType.Link,
 			label: "Mastodon",
 			url: publication.links.mastodon
 		});
@@ -26,7 +26,7 @@ export const PersonalHeader = () => {
 	if (publication.links && publication.links.bluesky) {
 		navbarItems.push({
 			id: "bsky",
-			type: PublicationNavigationType.Link,
+			// type: PublicationNavigationType.Link,
 			label: "Bluesky",
 			url: publication.links.bluesky
 		});
@@ -34,7 +34,7 @@ export const PersonalHeader = () => {
 	if (publication.links && publication.links.linkedin) {
 		navbarItems.push({
 			id: "linkedin",
-			type: PublicationNavigationType.Link,
+			// type: PublicationNavigationType.Link,
 			label: "LinkedIn",
 			url: publication.links.linkedin
 		});

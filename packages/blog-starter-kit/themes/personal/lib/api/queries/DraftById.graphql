@@ -10,7 +10,7 @@ query DraftById($id: ObjectId!) {
       name
       username
     }
-    dateUpdated
+    updatedAt
     tags {
       id
       name

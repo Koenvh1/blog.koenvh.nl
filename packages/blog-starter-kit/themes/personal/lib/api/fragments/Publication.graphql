@@ -42,7 +42,6 @@ fragment Publication on Publication {
 		bluesky
 	}
 	integrations {
-		umamiWebsiteUUID
 		gaTrackingID
 		fbPixelID
 		hotjarSiteID

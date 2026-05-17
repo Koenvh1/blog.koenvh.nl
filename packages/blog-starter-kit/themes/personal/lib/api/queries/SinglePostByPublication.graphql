@@ -63,21 +63,4 @@ fragment PostFull on Post {
 	preferences {
 		disableComments
 	}
-	comments(first: 25) {
-		totalDocuments
-		edges {
-			node {
-				id
-				totalReactions
-				content {
-					markdown
-				}
-				author {
-					name
-					username
-					profilePicture
-				}
-			}
-		}
-	}
 }
