@@ -2,6 +2,7 @@ export const getPublication = () => {
     return {
         "title": "Koen van Hove's personal writings",
         "author": "Koen van Hove",
+        "url": "https://blog.koenvh.nl",
         "description": "I am a computer person who likes toying with networking, security, and data. Also creates software. Over here I post my (rather occasional) writings that are too long for Mastodon and Bluesky.",
         "logo": "assets/logo.svg",
         "photo": "assets/photo.jpg",
