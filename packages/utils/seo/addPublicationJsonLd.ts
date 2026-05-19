@@ -7,14 +7,14 @@ export const addPublicationJsonLd = (publication: any) => {
 		'@id': PUBLICATION_URL || publication.url,
 		mainEntityOfPage: PUBLICATION_URL || publication.url,
 		name: publication.title,
-		description: publication.descriptionSEO,
+		description: publication.description,
 		publisher: {
-			'@type': publication.isTeam ? 'Organization' : 'Person',
+			'@type': 'Person',
 			'@id': PUBLICATION_URL || publication.url,
 			name: publication.title,
 			image: {
 				'@type': 'ImageObject',
-				url: publication.preferences?.logo,
+				url: publication.logo,
 			},
 		},
 	};

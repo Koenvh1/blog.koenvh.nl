@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { PublicationNavbarItem } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
 import { ToggleTheme } from './toggle-theme';
+import { getPublication } from '../utils/publication';
 
 function hasUrl(
 	navbarItem: PublicationNavbarItem,
@@ -12,31 +13,47 @@ function hasUrl(
 }
 
 export const PersonalHeader = () => {
-	const { publication } = useAppContext();
+	const publication  = getPublication();
 
-	let navbarItems = publication.preferences.navbarItems.filter(hasUrl);
-	if (publication.links && publication.links.mastodon) {
+	let navbarItems = [];
+	if (publication.website) {
+		navbarItems.push({
+			id: "website",
+			type: "link",
+			label: "Website",
+			url: publication.website
+		});
+	}
+	if (publication.cv) {
+		navbarItems.push({
+			id: "cv",
+			type: "link",
+			label: "CV",
+			url: publication.cv
+		});
+	}
+	if (publication.mastodon) {
 		navbarItems.push({
 			id: "mastodon",
 			type: "link",
 			label: "Mastodon",
-			url: publication.links.mastodon
+			url: publication.mastodon
 		});
 	}
-	if (publication.links && publication.links.bluesky) {
+	if (publication.bluesky) {
 		navbarItems.push({
 			id: "bsky",
 			type: "link",
 			label: "Bluesky",
-			url: publication.links.bluesky
+			url: publication.bluesky
 		});
 	}
-	if (publication.links && publication.links.linkedin) {
+	if (publication.linkedin) {
 		navbarItems.push({
 			id: "linkedin",
 			type: "link",
 			label: "LinkedIn",
-			url: publication.links.linkedin
+			url: publication.linkedin
 		});
 	}
 	const visibleItems = navbarItems.slice(0, 3);
@@ -103,13 +120,13 @@ export const PersonalHeader = () => {
 						<Link
 							className="flex flex-row items-center gap-2 text-lg font-bold leading-tight tracking-tight text-black dark:text-white"
 							href="/"
-							aria-label={`${publication.author.name}'s blog home page`}
+							aria-label={`${publication.author}'s blog home page`}
 						>
-							{publication.preferences.logo && (
+							{publication.logo && (
 								<img
 									className="block h-12"
-									alt={publication.author.name}
-									src={publication.preferences.logo}
+									alt={publication.author}
+									src={publication.logo}
 								/>
 							)}
 						</Link>

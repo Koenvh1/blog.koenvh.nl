@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { useAppContext } from './contexts/appContext';
+import { getPublication } from '../utils/publication';
 
 export const Footer = () => {
-	const { publication } = useAppContext();
+	const publication = getPublication();
 
 	return (
 		<footer className="border-t pt-10 text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">

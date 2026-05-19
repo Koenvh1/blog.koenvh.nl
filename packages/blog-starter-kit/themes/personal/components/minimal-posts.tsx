@@ -1,21 +1,24 @@
-import { PostFragment } from '../generated/graphql';
+import { getPublication } from '../utils/publication';
+import { Post } from '../utils/post';
 import { MinimalPostPreview } from './minimal-post-preview';
 
 type Props = {
-	posts: PostFragment[];
+	posts: Post[];
 	context: 'home' | 'series' | 'tag';
 };
 
 export const MinimalPosts = ({ posts }: Props) => {
+	const publication = getPublication();
+
 	return (
 		<section className="flex w-full flex-col items-stretch gap-10">
 			{posts.map((post) => (
 				<MinimalPostPreview
-					key={post.id}
+					key={post.slug}
 					title={post.title}
-					date={post.publishedAt}
+					date={post.datePublished}
 					author={{
-						name: post.author.name,
+						name: publication.author,
 					}}
 					slug={post.slug}
 				/>

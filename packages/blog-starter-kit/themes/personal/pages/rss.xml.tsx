@@ -2,40 +2,23 @@ import { constructRSSFeedFromPosts } from '@starter-kit/utils/feed';
 import request from 'graphql-request';
 import { GetServerSideProps } from 'next';
 import { RssFeedDocument, RssFeedQuery, RssFeedQueryVariables } from '../generated/graphql';
+import { getPublication } from '../utils/publication';
+import { getPosts } from '../utils/posts';
 
-const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
 const RSS = () => null;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { res, query } = ctx;
 	const after = query.after ? (query.after as string) : null;
 
-	const data = await request<RssFeedQuery, RssFeedQueryVariables>(GQL_ENDPOINT, RssFeedDocument, 
-		{
-			first: 20,
-			host: process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST,
-			after,
-		},
-		{
-			"hn-stellate-bypass-cache": "1"
-		}
-	);
-
-	const publication = data.publication;
-	if (!publication) {
-		return {
-			notFound: true,
-		};
-	}
-	const allPosts = publication.posts.edges.map((edge) => edge.node);
+	const publication = getPublication();
+	const posts = getPosts();
 
 	const xml = constructRSSFeedFromPosts(
 		publication,
-		allPosts,
+		posts,
 		after,
-		publication.posts.pageInfo.hasNextPage && publication.posts.pageInfo.endCursor
-			? publication.posts.pageInfo.endCursor
-			: null,
+		null,
 	);
 
 	res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
