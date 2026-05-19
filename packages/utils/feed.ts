@@ -36,7 +36,7 @@ export const constructRSSFeedFromPosts = (
 		description: publication.description,
 		feed_url: `${baseUrl}/rss.xml`,
 		site_url: baseUrl,
-		image_url: publication.logo,
+		image_url: `${baseUrl}/${publication.logo}`,
 		language: 'en',
 		ttl: 60,
 		custom_elements: customElements,
