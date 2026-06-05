@@ -1,4 +1,6 @@
 import RSS from 'rss';
+import { markdownToHtml } from './renderer/markdownToHtml';
+
 
 const PUBLICATION_URL = process.env.NEXT_PUBLICATION_URL;
 
@@ -47,7 +49,7 @@ export const constructRSSFeedFromPosts = (
 	posts.forEach((post) => {
 		feed.item({
 			title: post.title,
-			description: post.content,
+			description: markdownToHtml(post.content),
 			url: `${baseUrl}/${post.slug}`,
 			author: publication.author,
 			date: post.datePublished,
