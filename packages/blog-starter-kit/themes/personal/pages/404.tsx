@@ -11,6 +11,6 @@ export default function Error() {
 export const getStaticProps: GetStaticProps = async () => {
     return { 
         props: {},
-        revalidate: 300
+        revalidate: 86400
     };
 };

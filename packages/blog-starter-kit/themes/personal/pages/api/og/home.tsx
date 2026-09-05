@@ -222,7 +222,7 @@ export default async function handler(req: NextRequest) {
 				},
 			],
 			headers: {
-				'Cache-Control': 'max-age=3600, s-maxage=86400, stale-while-revalidate'
+				'Cache-Control': 'max-age=86400, s-maxage=86400, stale-while-revalidate'
 			}
 		},
 	);

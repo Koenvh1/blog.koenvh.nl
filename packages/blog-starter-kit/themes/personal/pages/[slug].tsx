@@ -148,7 +148,7 @@ export const getStaticProps: GetStaticProps<PostProps, Params> = async ({ params
 	if (!/^[a-z0-9-]+$/.test(slug)) {
 		return {
 			notFound: true,
-			revalidate: 300,
+			revalidate: 86400,
 		};
 	}
 
@@ -161,13 +161,13 @@ export const getStaticProps: GetStaticProps<PostProps, Params> = async ({ params
 				type: 'post',
 				post: postData,
 			},
-			revalidate: 300,
+			revalidate: 86400,
 		};
 	}
 
 	return {
 		notFound: true,
-		revalidate: 300,
+		revalidate: 86400,
 	};
 };
 
